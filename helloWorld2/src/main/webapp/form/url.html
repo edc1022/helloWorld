@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>page147(url.html)</title>
+    <style>
+        h3 {
+            text-align: center;
+            background-color: azure;
+        }
+        form {
+            border: 3px solid gray;
+            width: 55%;
+            margin: auto;
+        }
+        ul {
+            list-style-type: square;
+        }
+        label {
+            display: inline-block;
+            width: 150px;
+            background-color: antiquewhite;
+            text-align: right;
+            padding-right: 5px;
+        }
+        input[type='submit'] {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 147page 회원가입 페이지. -->
+    <h3>회원가입</h3>
+    <form action="">
+    <fieldset>
+        <legend>로그인 정보</legend>
+        <ul>
+            <li>
+                <label for="id">아이디</label>
+                <input type="text" name="id" id="id">
+                <button type="button">중복확인</button>
+            </li>
+            <li>
+                <label for="passwd">비밀번호</label>
+                <input type="password" name="passwd" id="passwd">
+            </li>
+            <li>
+                <label for="passwd2">비밀번호 확인</label>
+                <input type="password" name="passwd2" id="passwd2">
+            </li>
+        </ul>
+    </fieldset>
+
+    <fieldset>
+        <legend>개인 정보</legend>
+        <ul>
+            <li>
+                <label for="name">이름</label>
+                <input type="text" name="name" id="name" required>
+            </li>
+            <li>
+                <label for="mail">메일 주소</label>
+                <input type="email" name="mail" id="mail">
+            </li>
+            <li>
+                <label for="phone">연락처</label>
+                <input type="tel" name="phone" id="phone">
+            </li>
+            <li>
+            <label for="homep">블로그/홈페이지</label>
+            <input type="url" name="homep" id="homep">
+            </li>
+            <li>
+                <label for="birth">생년월일</label>
+                <input type="date" name="birth" id="birth"> 
+            </li>
+
+
+        </ul>
+    </fieldset>
+    <br>
+    <input type="submit" value="가입하기">
+
+</form>
+</body>
+
+</html>

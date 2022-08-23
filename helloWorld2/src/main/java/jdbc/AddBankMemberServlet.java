@@ -43,7 +43,7 @@ public class AddBankMemberServlet extends HttpServlet {
 		
 		MemberManage.getInstance().registCustomer(member);
 		
-		response.sendRedirect("index.html");
+	//	response.sendRedirect("index.html");
 		
 	}
 

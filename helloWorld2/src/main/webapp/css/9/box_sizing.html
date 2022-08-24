@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>09/box-sizing.html</title>
+    <style>
+        div[class] {
+            width: 300px;
+            height: 150px;
+            margin: 10px;
+            border: 5px solid brown;
+            padding: 10px;
+        }
+        .box1 {
+            box-sizing: border-box;
+            display: inline-block;
+        }
+        .box2 {
+            box-sizing: content-box;
+        }
+        #first {
+            width: 640px;
+            height: 340px;
+            border: 2px dotted green;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="first">
+
+    <div class="box1">border-box</div>
+    <div class="box1">border-box</div>
+</div>
+<div class="box2">border-box</div>
+
+</body>
+
+</html>

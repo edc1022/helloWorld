@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>javascript/basic.html</title>
+</head>
+
+<body>
+    <h3>Hello, World!</h3>
+    <script>
+        let person = {
+            name: "Hong",
+            age: 20,
+            showInfo: function () {
+                console.log('이름은: ' + this.name + ',나이는:' + this.age);
+            }
+        }
+        person.showInfo(); //object에 있는 함수: 메소드
+    
+        document.write('<h1>Hello, World<h1>');
+
+       // window.alert('경고구문입니다!!');
+
+       let fruits = ['사과','바나나','배','복숭아','수박']; //배열: object (복합적인것은 object다)
+       let str = '<ul>';
+    //    for(let i=0; i<fruits.length; i++) {
+    //     str += '<li>' + fruits[i] + '</li>'; // + 연산자: concat()
+    //    }
+    for(let fruit of fruits) { //확장 for.
+        str += '<li>' + fruit + '</li>';
+    }
+        str += '</ul>';
+       //document.write'<ul><li>사과</li><li>바나나</li></ul>'';
+        document.write(str);
+
+        let member = {
+            userId: 'hong',
+            userName: '홍길동',
+            point: 350
+        }
+        console.log(member.userId); //'hong'
+        console.log(member['userName']); //'홍길동'
+        let field = 'point';
+        console.log(member[field]); //350
+
+        //object의 각각의 속성을 전체 읽어오는 반복.
+        for(let prop in member) {
+            console.log('속성:' +prop + ', 값:' + member[prop]);
+        }
+
+    </script>
+
+</body>
+
+</html>

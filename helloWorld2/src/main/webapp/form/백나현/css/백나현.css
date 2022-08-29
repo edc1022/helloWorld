@@ -1,0 +1,110 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: '맑은 고딕';
+}
+
+#container {
+    width: 1000px;
+    
+    margin: 0 auto;
+}
+
+nav ul li {
+    height: 100px;
+    display: inline;
+    background-color: rgb(174, 174, 234);
+   
+}
+
+aside,section {
+    float: left;
+    width: 200px;
+    height: 700px;
+    text-align:center;
+}
+
+.sidebar2 {
+    float: right;
+    width: 200px;
+    height: 700px;
+    text-align:center;
+}
+
+footer {
+    height: 50px;
+    background-color: rgb(174, 174, 234);
+    position: relatiev;
+    clear: both;
+    text-align:center;
+}
+
+fieldset {
+    margin-bottom: 15px;
+}
+
+legend {
+    font-weight: bold;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    line-height: 30px;
+}
+header {
+    height: 50px;
+    text-align:center;
+    position: relatiev;
+    clear: both;
+    
+}
+form {
+    width: 500px;
+    position: center;
+    background-color: #ccc;
+}
+li label {
+    width:120px;
+   float:left;
+   text-align:right;
+   padding-right:8px;
+}
+section {
+    text-align:center;
+    width: 600px;
+    height: 700px;
+    padding: auto;
+}
+form li {
+    border-radius: 5px;
+    border-style: solid white;
+    background-color: transparent;
+}
+nav ul li a:hover {
+    background: pink;
+    color: black;
+}
+label {
+    display:inline-block;
+    width: 130px;
+}
+input {
+    display:inline-block;
+    width: 250x;
+    margin: 3px;
+}
+button {
+    width: 150px;
+    border-radius: 5px;
+    background-color: #ddd;
+    padding: 15px;
+
+
+
+
+}

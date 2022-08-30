@@ -24,18 +24,9 @@ for (let prop in obj) {
 }
 
 // 배열[{객체},{객체},{객체}]
-let members = [{
-        id: 'user1',
-        name: '사용자1'
-    },
-    {
-        id: 'user2',
-        name: '사용자2'
-    },
-    {
-        id: 'user3',
-        name: '사용자3'
-    },
+let members = [{id: 'user1',name: '사용자1'},
+    {id: 'user2', name: '사용자2'},
+    {id: 'user3',name: '사용자3'},
 
 ]
 let str = '<table border=1>'; // table 형식으로 출력해주겠다  

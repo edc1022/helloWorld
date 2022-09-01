@@ -8,17 +8,77 @@
 </head>
 <body>
 
-    <div id="show"></div>
+    <div id="show">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>아이디</th>
+                    <th>이름</th>
+                    <th>비밀번호</th>
+                </tr>
+            </thead>
+            <tbody id="list"></tbody>
+        </table>
+    </div>
 
     <script>
         // 서버상에 있는 html, jsp, 서블릿.
        let xhtp = new XMLHttpRequest();
-       xhtp.open('get','../index.html');
+       xhtp.open('get','../memberList');
        xhtp.send(); // 서버에 요청.
        xhtp.onload = function () {
-          console.log (xhtp.response); // on 이 붙으면 이벤트와 관련.
-
+    	   let = data = JSON.parse(xhtp.response);
+          console.log (data); // on 이 붙으면 이벤트와 관련.
+          let list = document.getElementById('list');
+          // 서버의 json 파일 받아와서 -> JSON.parse() 파싱해서 -> 페이지 출력.
+          
+          data.forEach(data => {
+        	  
+          let tr = document.createElement('tr');
+          
+          let td = document.createElement('td');
+          let txt = document.createTextNode(data.memberId);
+          td.appendChild(txt); // id
+          
+          let td2 = document.createElement('td');
+          let txt2 = document.createTextNode(data.memberName);
+          td2.appendChild(txt2); // first_name
+          
+          let td3 = document.createElement('td');
+          let txt3 = document.createTextNode(data.memberPw);
+          td3.appendChild(txt3); // password
+          
+          let td4 = document.createElement('td');
+          let btn =document.createElement('button');
+        	  // 삭제이벤트 : ajax 호출.
+          btn.addEventListener('click', function() {
+        	  let delAjax = new XMLHttpRequest();
+        	  delAjax.open('post', '../memberList');
+        	  delAjax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        	  delAjax.send('del_id='+ this.parentElement.firstElementChild.textContent);
+        	  delAjax.onload = function (e) {
+        		  let result = delAjax.responseText;
+        		  console.log(result);
+        		  if(result == 'success') {
+        			  btn.parentElement.parentElement.remove();
+        		  } else {
+        			  alert('처리중 에러발생,');
+        		  }
+        	  }
+          })
+          let txt4 = document.createTextNode('삭제');
+          btn.append(txt4);
+          td4.append(btn);
+          
+          
+          
+          tr.append(td,td2,td3,td4);
+          
+          list.append(tr);
+          })
        }
      </script>
+          
+          
 </body>
 </html>

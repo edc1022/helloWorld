@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>javascript/ajax.html</title>
+</head>
+<body>
+
+    <div id="show"></div>
+
+    <script>
+        // 서버상에 있는 html, jsp, 서블릿.
+       let xhtp = new XMLHttpRequest();
+       xhtp.open('get','../index.html');
+       xhtp.send(); // 서버에 요청.
+       xhtp.onload = function () {
+          console.log (xhtp.response); // on 이 붙으면 이벤트와 관련.
+
+       }
+     </script>
+</body>
+</html>

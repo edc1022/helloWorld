@@ -1,4 +1,4 @@
-// dom_manipulate2.js
+// dom_manipulate2.js // 학습용
 const members = [
     {mid: 'admin', mname: '관리자', mphone: '010-1111-2222'},
     {mid: 'hong12', mname: '홍길동', mphone: '010-2345-8765'},

@@ -11,18 +11,26 @@
         * {
             box-sizing: border-box;
         }
+
         table {
             width: 70%;
             float: left;
             border: 1px solid green;
         }
+
         div#detailInfo {
             width: 30%;
             float: left;
             border: 1px solid green;
             height: 300px;
         }
+        div#piechart {
+            clear: both;
+        }
     </style>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 </head>
 
 <body>
@@ -30,7 +38,7 @@
     <label for="center">조회대상입력: <input type="text" name="center" id="center"></label>
     <button id="searchBtn">조회</button>
 
-    <label for="">시도리스트: 
+    <label for="">시도리스트:
         <select id="sido">
             <option>선택</option>
         </select></label>
@@ -47,7 +55,7 @@
         <tbody id="list"></tbody>
     </table>
 
-    <div id="detailInfo"> 
+    <div id="detailInfo">
         <ul>
             <li>org:<span>국립중앙의료원</span></li>
             <li>lat:<span>12.34567</span></li>
@@ -57,10 +65,11 @@
 
     </div>
 
-    <script>
+    <div id="piechart" style = "width:900 px; height:700 px;"></div>
 
+    <script>
         // 조회클릭
-        document.getElementById('searchBtn').addEventListener('click' ,searchCenterFnc);
+        document.getElementById('searchBtn').addEventListener('click', searchCenterFnc);
 
         // 리스트선택
         document.getElementById('sido').addEventListener('change', searchCenterFnc);
@@ -83,7 +92,7 @@
 
             let tbody = document.getElementById('list');
 
-            // 결과중에서 result
+            // 결과중에서 result.data 가 필요한 실데이터.
             let data = result.data;
             gdata = data;
 
@@ -96,24 +105,34 @@
                     tbody.append(makeTr(center));
 
                 //시도데이터 구분
-                if(sidoData.indexOf(center.sido) == -1){
+                if (sidoData.indexOf(center.sido) == -1) {
                     sidoData.push(center.sido);
                 }
 
-                // 차트에 들어갈 데이터 구분.
-                if(chartData.some(ary => ary[0] == center.sido)) {
-                   
-                   
-                    } else {
-                       
-                        chartData.push([center.sido, 1])
-                    }
-                });
-                console.log(chartData)
-                
+            //     // 차트에 들어갈 데이터 구분.
+            //     if (chartData.some(ary => ary[0] == center.sido)) {
 
-           
 
+            //     } else {
+
+            //         chartData.push([center.sido, 1])
+            //     }
+            // });
+            // console.log(chartData)
+
+            // 시도(서울특별시, 대전광역시) chartData.push(['서울특별시',1]) : 처음 데이터 등록만 push
+            // ['서울특별시',4] : push 추가 안하고 숫타 카운트 증가.
+            let dChart = chartData.find(chart => chart[0] == center.sido); // 찾아보고 없으면 undefined
+            if (dChart) { // 값이 있으면...
+                dChart[1]++;
+            } else { // 값이 없으면...
+                chartData.push([center.sido, 1])
+            }
+        });
+        makeChart();
+        
+
+        
             // select에 option을 달아준다.
             let sel = document.getElementById('sido');
             sidoData.forEach(sido => {
@@ -121,11 +140,45 @@
                 opt.textContent = sido;
                 opt.value = sido;
                 sel.append(opt);
-            });
-        }
 
+
+        });
+
+        function makeChart() {
+            google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      
+      function drawChart() {
+
+        // let chartData = [
+        //   ['Task', 'Hours per Day'],
+        //   ['Work',     11],
+        //   ['Eat',      2],
+        //   ['Commute',  2],
+        //   ['Watch TV', 2],
+        //   ['Sleep',    7]
+        // ];
+
+        chartData.unshift(['시도', '건수']); // unshift: 첫번째값 넣어주는. head 정보
+        var data = google.visualization.arrayToDataTable(chartData);
+
+        var options = {
+          title: '코로나19 센터 시도별 현황'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+        } // end of pageLoadCallBack()
+
+
+    }
+    
+    
         function makeTr(center) {
-            let tr = document.createElement('tr');
+        let tr = document.createElement('tr');
             // 보고싶은 항목.
             let infos = ['id', 'centerName', 'sido', 'sigungu', 'phoneNumber', 'address'];
             infos.forEach(info => {
@@ -143,20 +196,20 @@
         function searchCenterFnc(e) {
             console.log(e.target.nodeName);
             let sido;
-            if(e.target.nodeName == 'BUTTON') {
+            if (e.target.nodeName == 'BUTTON') {
                 sido = document.getElementById('center').value; //  조회하려는 시도.
-                
-            }else if(e.target.nodeName == 'SELECT') {
+
+            } else if (e.target.nodeName == 'SELECT') {
                 sido = e.target.value;
             }
-            let tbody = document.getElementById('list');    
+            let tbody = document.getElementById('list');
 
             //이미 있던 tr삭제.
             document.querySelectorAll('#list>tr').forEach(tr => tr.remove());
 
             //추가로 그려주는 부분.
             gdata.forEach(center => {
-                if(center.sido.startsWith(sido)) {
+                if (center.sido.startsWith(sido)) {
                     tbody.append(makeTr(center)); // 조회된 시도.
                 }
             });
